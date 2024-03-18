@@ -86,15 +86,12 @@ public class AdminController {
     }
     @GetMapping("/get/portfolio")
     public ResponseEntity<?> getPortfolio(@RequestParam String token){
-        List<Portfolio> portfolio= portfolioService.getPortfolio();
+
         if(authService.authenticate(token)) {
-            try {
-                if (!portfolio.isEmpty()) return new ResponseEntity<>(portfolio, HttpStatus.OK);
-                else return new ResponseEntity<>("Empty", HttpStatus.OK);
-            } catch (Exception e) {
-                return new ResponseEntity<>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
+            List<Portfolio> portfolio= portfolioService.getPortfolio();
+            if (!portfolio.isEmpty()) return new ResponseEntity<>(portfolio, HttpStatus.OK);
+            else return new ResponseEntity<>("Empty", HttpStatus.OK);
             }
-        }
         return new ResponseEntity<>("Admin not found",HttpStatus.UNAUTHORIZED);
     }
     @PutMapping("/update/portfolio")
