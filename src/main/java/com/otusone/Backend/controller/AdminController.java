@@ -86,7 +86,6 @@ public class AdminController {
     }
     @GetMapping("/get/portfolio")
     public ResponseEntity<?> getPortfolio(@RequestParam String token){
-
         if(authService.authenticate(token)) {
             List<Portfolio> portfolio= portfolioService.getPortfolio();
             if (!portfolio.isEmpty()) return new ResponseEntity<>(portfolio, HttpStatus.OK);
@@ -151,5 +150,16 @@ public class AdminController {
     @PostMapping("/contact/us")
     public ResponseEntity<String> contactUs(@RequestBody ContactUs contact){
         return contactService.contactUs(contact);
+    }
+    @PostMapping("/get/contact")
+    public ResponseEntity<?> getContact(){
+        return contactService.getContact();
+    }
+    @DeleteMapping("/delete/contact/info")
+    public ResponseEntity<String> deleteContactInfo(@RequestBody String token,@RequestParam Integer contactId){
+        if(authService.authenticate(token)){
+            return contactService.deleteContactInfo(contactId);
+        }
+        return new ResponseEntity<>("Admin not found",HttpStatus.UNAUTHORIZED);
     }
 }

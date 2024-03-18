@@ -37,7 +37,12 @@ public class PortfolioService {
     public ResponseEntity<String> updatePortfolio(Portfolio portfolio, Integer id) {
         Portfolio portfolio1 = portfolioRepo.findById(id).orElse(null);
         if(portfolio1 == null)return new ResponseEntity<>("Portfolio not found .",HttpStatus.NOT_FOUND);
-        else portfolioRepo.save(portfolio);
+        else {
+            portfolio1.setImg(portfolio.getImg());
+            portfolio1.setHeading(portfolio.getHeading());
+            portfolio1.setDescription(portfolio.getDescription());
+            portfolioRepo.save(portfolio1);
+        }
         return new ResponseEntity<>("Portfolio update .",HttpStatus.OK);
     }
 }
