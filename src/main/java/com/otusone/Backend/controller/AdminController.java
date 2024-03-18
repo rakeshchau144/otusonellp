@@ -162,4 +162,10 @@ public class AdminController {
         }
         return new ResponseEntity<>("Admin not found",HttpStatus.UNAUTHORIZED);
     }
+    @Autowired
+    private ChatService chatService;
+    @PostMapping("/lets/talk")
+    public ResponseEntity<String> letsTalk(@RequestBody Chat chat) throws MessagingException {
+        return chatService.letsTalk(chat);
+    }
 }
