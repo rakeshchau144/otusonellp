@@ -32,7 +32,7 @@ public class HiringFormService {
         hiringFormRepo.save(hiringForm);
         String massage = "Hi " + hiringForm.getFirstName() +
                 "\n" +
-                " Thanks for your interest in our company" +
+                " Thanks for your interest in our company." +
                 "\n" +
                 "\nI'm HR at OTUSONE LLP Noida and I'd like to take your application to next step." +
                 "\nIf your resume shortlisted then our team will contact you " +
@@ -41,7 +41,7 @@ public class HiringFormService {
                 "\n" +
                 "\n" +
                 "\n"+
-                "\nKind regards"+
+                "\nKind regards,"+
                 "\nAparna Singh"+
                 "\nOTUSONE LLP";
         File f = convertMultipartFileToFile(file);
