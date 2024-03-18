@@ -1,10 +1,7 @@
 package com.otusone.Backend.controller;
 
 import com.otusone.Backend.fileUploadSetUp.CloudinaryController;
-import com.otusone.Backend.model.Admin;
-import com.otusone.Backend.model.HiringForm;
-import com.otusone.Backend.model.JobPost;
-import com.otusone.Backend.model.Portfolio;
+import com.otusone.Backend.model.*;
 import com.otusone.Backend.service.*;
 import com.otusone.Backend.service.dto.LoginOutput;
 import com.otusone.Backend.service.dto.SignInInput;
@@ -151,5 +148,11 @@ public class AdminController {
         List<HiringForm> list = hiringFormService.getHiringForms();
         if(list.size()==0)return new ResponseEntity<>("Empty",HttpStatus.CREATED);
         return new ResponseEntity<>(list,HttpStatus.OK);
+    }
+    @Autowired
+    private ContactService contactService;
+    @PostMapping("/contact/us")
+    public ResponseEntity<String> contactUs(@RequestBody ContactUs contact){
+        return contactService.contactUs(contact);
     }
 }

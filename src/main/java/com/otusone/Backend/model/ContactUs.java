@@ -1,6 +1,5 @@
 package com.otusone.Backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,20 +10,14 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Entity
-public class HiringForm {
+@Data
+public class ContactUs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer hiringFormId;
-    private String firstName;
-    private String lastName;
+    private Integer id;
+    private String fullName;
     private String email;
-    private String phoneNumber;
-    private String highestQualification;
-    private String experience;
-    private String currentCTC;
-    @JsonIgnore
-    private String resume;
-
+    private String service;
+    private String message;
 }
