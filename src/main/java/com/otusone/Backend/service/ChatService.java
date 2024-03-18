@@ -16,16 +16,16 @@ public class ChatService {
     private ChatRepo chatRepo;
 
     public ResponseEntity<String> letsTalk(Chat chat) throws MessagingException {
-        String message = "Mr. "+chat.getFullName()+"" +
-                "Wants chat with you " +
+        String message = "Mr. "+chat.getFullName()+" " +
+                "wants chat with you " +
                 "\n" +
                 "\n" +
                 "His details." +
                 "\n" +
-                "Name :-"+chat.getFullName()+"" +
-                "\n Email :-"+chat.getEmail()+"" +
-                "\n Phone NUmber :-"+chat.getNumber()+"" +
-                "\n Topic he want to talk -"+chat.getMassage()+"";
+                "Name :- "+chat.getFullName()+"" +
+                "\n Email :- "+chat.getEmail()+"" +
+                "\n Phone Number :- "+chat.getNumber()+"" +
+                "\n Topic he want to talk - "+chat.getMassage()+"";
         EmailHandler.sendEmail("rakeshoutsone@gmail.com","Client want chat with you",message);
         chatRepo.save(chat);
         return new ResponseEntity<>("message send to admin !!", HttpStatus.OK);
