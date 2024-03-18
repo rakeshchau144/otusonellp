@@ -41,12 +41,10 @@ public class AdminController {
         return new ResponseEntity<>("Admin not found",HttpStatus.UNAUTHORIZED);
     }
     @GetMapping("/get/job/post")
-    public ResponseEntity<?> getJobPost(@RequestParam String token){
-        if(authService.authenticate(token)) {
-            List<JobPost> jobPosts = jobService.getJobPost();
-            if (!jobPosts.isEmpty()) return new ResponseEntity<>(jobPosts, HttpStatus.OK);
-            return new ResponseEntity<>("Empty", HttpStatus.OK);
-        }return new ResponseEntity<>("Admin not found",HttpStatus.UNAUTHORIZED);
+    public ResponseEntity<?> getJobPost(){
+        List<JobPost> jobPosts = jobService.getJobPost();
+        if (!jobPosts.isEmpty()) return new ResponseEntity<>(jobPosts, HttpStatus.OK);
+        return new ResponseEntity<>("Empty", HttpStatus.OK);
     }
     @DeleteMapping("/delete/job/post")
     public ResponseEntity<String> deleteJobPost(@RequestParam String token,@RequestParam Integer id){
@@ -85,13 +83,11 @@ public class AdminController {
         return new ResponseEntity<>("Admin not found",HttpStatus.UNAUTHORIZED);
     }
     @GetMapping("/get/portfolio")
-    public ResponseEntity<?> getPortfolio(@RequestParam String token){
-        if(authService.authenticate(token)) {
+    public ResponseEntity<?> getPortfolio(){
             List<Portfolio> portfolio= portfolioService.getPortfolio();
             if (!portfolio.isEmpty()) return new ResponseEntity<>(portfolio, HttpStatus.OK);
             else return new ResponseEntity<>("Empty", HttpStatus.OK);
-            }
-        return new ResponseEntity<>("Admin not found",HttpStatus.UNAUTHORIZED);
+
     }
     @PutMapping("/update/portfolio")
     private ResponseEntity<String> updatePortFolio(@RequestParam("token") String token,
