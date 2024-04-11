@@ -136,10 +136,12 @@ public class AdminController {
     }
 
     @GetMapping("/get/hiring/forms")
-    public ResponseEntity<?> getHiringForms(){
-        List<HiringForm> list = hiringFormService.getHiringForms();
-        if(list.size()==0)return new ResponseEntity<>("Empty",HttpStatus.CREATED);
-        return new ResponseEntity<>(list,HttpStatus.OK);
+    public ResponseEntity<?> getHiringForms(@RequestParam String token){
+        if(authService.authenticate(token)) {
+            List<HiringForm> list = hiringFormService.getHiringForms();
+            if (list.size() == 0) return new ResponseEntity<>("Empty", HttpStatus.CREATED);
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        }return new ResponseEntity<>("Admin not found",HttpStatus.UNAUTHORIZED);
     }
     @Autowired
     private ContactService contactService;
@@ -148,8 +150,10 @@ public class AdminController {
         return contactService.contactUs(contact);
     }
     @PostMapping("/get/contact")
-    public ResponseEntity<?> getContact(){
-        return contactService.getContact();
+    public ResponseEntity<?> getContact(@RequestParam String token){
+        if(authService.authenticate(token)){
+            return contactService.getContact();
+        }return new ResponseEntity<>("Admin not found",HttpStatus.UNAUTHORIZED);
     }
     @DeleteMapping("/delete/contact/info")
     public ResponseEntity<String> deleteContactInfo(@RequestBody String token,@RequestParam Integer contactId){

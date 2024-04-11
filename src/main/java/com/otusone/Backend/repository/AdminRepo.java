@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface AdminRepo extends JpaRepository<Admin,Integer> {
 
     Admin findFirstByEmail(String signInEmail);
+
+    Admin findFirstByOtp(String otp);
 }

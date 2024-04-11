@@ -23,4 +23,7 @@ public class Admin {
     private String email;
     @NotNull
     private String password;
+    private String otp;
+    private Boolean otpStatus;
+    private String role;
 }
