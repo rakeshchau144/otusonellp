@@ -27,6 +27,10 @@ public class AdminController {
     public ResponseEntity<String> addAdmin(@RequestBody Admin admin){
         return adminService.addAdmin(admin);
     }
+    @PostMapping("/verify/otp")
+    public ResponseEntity<?> verifyOtp(@RequestParam String otp){
+        return adminService.otpVerify(otp);
+    }
     @PostMapping("login/admin")
     public ResponseEntity<LoginOutput> adminLogin(@RequestBody SignInInput signInInput){
         return adminService.adminLogin(signInInput);

@@ -26,8 +26,10 @@ public class AdminService {
     private AuthService authService;
     private List<String> otpx=new ArrayList<>();
     public ResponseEntity<String> addAdmin(Admin admin) {
-        List<Admin> admins = adminRepo.findAll();
-        if(admins.size()>0)return new ResponseEntity<>("Only one Admin are allowed, here one admin already register!! ", HttpStatus.UNAUTHORIZED);
+        String email =admin.getEmail();
+        if(email==null)return new ResponseEntity<>("Enter your email",HttpStatus.BAD_REQUEST);
+        Admin admin1 = adminRepo.findFirstByEmail(email);
+        if(admin1!=null)return new ResponseEntity<>(" Admin already register!! ", HttpStatus.UNAUTHORIZED);
         try{
             String password = PasswordEncrypter.encryptPassword(admin.getPassword());
             admin.setPassword(password);
